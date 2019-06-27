@@ -1,5 +1,5 @@
 import QtQuick 2.0
 
-Item {
-
+Image {
+    source: "image://dicom_image_provider/img"
 }
