@@ -8,16 +8,23 @@ import PIL.ImageQt
 
 class DicomImageProvider(QQuickImageProvider):
 
-    def __init__(self):
+    def __init__(self, patients):
         super().__init__(QQuickImageProvider.Image)
+        self._patients = patients
 
 
 
     def requestImage(self, id, size):
+        """Returns DICOM image.
 
-        # read a frame
-        frame = pydicom.dcmread(
-            "/tmp/patients/HIREZ_#9_UTMC.pat/HIREZ_#9_UTMC.CT.POST_11_21_2003.3.120.2007.10.12.14.36.23.671875.40010.ima")
+        id: <study_number>/<series_number>"""
+
+        studyNumber, seriesNumber = self._parseUri(id)
+
+        patient = self._patients[0]
+        study = patient.getStudy(studyNumber)
+        series = study.getSeries(seriesNumber)
+        frame = series.getFrame(50)
 
         arrayImage = frame.pixel_array
 
@@ -27,3 +34,12 @@ class DicomImageProvider(QQuickImageProvider):
         # convert the image to a format understood by Qt and return tuple of image and size as required by
         # QQuickImageProvider protocol
         return (PIL.ImageQt.ImageQt(pilImage), size)
+
+
+
+    def _parseUri(self, uri):
+        uriSplit = uri.split("/")
+        studyNumber = int(uriSplit[0])
+        seriesNumber = int(uriSplit[1])
+
+        return (studyNumber, seriesNumber)

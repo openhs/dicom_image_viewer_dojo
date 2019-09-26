@@ -6,6 +6,7 @@ from PyQt5.QtQuick import QQuickView
 from PyQt5.QtCore import QUrl
 
 from dicom_image_provider import DicomImageProvider
+from patients import Patients
 
 
 
@@ -14,7 +15,8 @@ if __name__ == "__main__":
 
     view = QQuickView()
 
-    dicomImageProvider = DicomImageProvider()
+    patients = Patients("/tmp/patients")
+    dicomImageProvider = DicomImageProvider(patients)
     view.engine().addImageProvider("dicom_image_provider", dicomImageProvider)
 
     currentDir = os.path.dirname(os.path.abspath(__file__))
