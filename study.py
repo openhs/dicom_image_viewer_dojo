@@ -13,6 +13,12 @@ class Study:
 
 
 
+    @property
+    def studyDescription(self):
+        return self._datasets[0].StudyDescription if self._datasets else ""
+
+
+
     def getSeries(self, number):
         return next(islice(self._getSerieses(), number, None), Series())
 

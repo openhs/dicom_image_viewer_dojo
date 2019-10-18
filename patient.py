@@ -9,12 +9,18 @@ from study import Study
 class Patient:
 
     def __init__(self, datasets = []):
-        self._datasets = datasets
+        self._studies = self._getStudies(datasets)
+
+
+
+    @property
+    def studies(self):
+        return self._studies
 
 
 
     def getStudy(self, number):
-        return self._getStudies(self._datasets)[number]
+        return self.studies[number]
 
 
 

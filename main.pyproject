@@ -1,3 +1,3 @@
 {
-    "files": ["main.qml","dicom_image_provider.py","main.py","patient.py","study.py","Layout2x2.qml","patients.py","series.py"]
+    "files": ["Layout2x2.qml","study.py","patients.py","main.py","series.py","main.qml","dicom_image_provider.py","patient.py","navigator_items.py"]
 }
