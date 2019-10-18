@@ -1,5 +1,3 @@
-#- # This Python file uses the following encoding: utf-8
-#- from PyQt5 import QtWidgets
 from itertools import groupby, islice
 
 from series import Series

@@ -1,5 +1,3 @@
-#- # This Python file uses the following encoding: utf-8
-#- from PyQt5 import QtWidgets
 import os
 import pydicom
 from itertools import groupby

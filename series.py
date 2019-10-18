@@ -1,6 +1,3 @@
-#- # This Python file uses the following encoding: utf-8
-#- from PyQt5 import QtWidgets
-
 from itertools import islice
 from pydicom.dataset import Dataset
 
