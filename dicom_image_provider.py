@@ -1,3 +1,5 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QImage
 from PyQt5.QtQuick import QQuickImageProvider
 import pydicom
 import PIL.Image
@@ -11,19 +13,25 @@ class DicomImageProvider(QQuickImageProvider):
         super().__init__(QQuickImageProvider.Image)
         self._patients = patients
 
+        self._emptyImage = QImage(512, 512, QImage.Format_RGB32)
+        self._emptyImage.fill(Qt.darkRed)
+
 
 
     def requestImage(self, id, size):
         """Returns DICOM image.
 
-        id: <study_number>/<series_number>"""
+        id: <study_number>/<series_number>/<frame_number>"""
 
-        studyNumber, seriesNumber = self._parseUri(id)
+        studyNumber, seriesNumber, frameNumber = self._parseUri(id)
 
         patient = self._patients[0]
         study = patient.getStudy(studyNumber)
         series = study.getSeries(seriesNumber)
-        frame = series.getFrame(50)
+        frame = series.getFrame(frameNumber)
+
+        if "PixelData" not in frame:
+            return (self._emptyImage, size)
 
         arrayImage = frame.pixel_array
 
@@ -40,5 +48,6 @@ class DicomImageProvider(QQuickImageProvider):
         uriSplit = uri.split("/")
         studyNumber = int(uriSplit[0])
         seriesNumber = int(uriSplit[1])
+        frameNumber = int(uriSplit[2])
 
-        return (studyNumber, seriesNumber)
+        return (studyNumber, seriesNumber, frameNumber)

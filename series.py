@@ -11,4 +11,4 @@ class Series:
 
 
     def getFrame(self, number):
-        return next(islice(self._datasets, number, None), Dataset())
+        return next(islice(self._datasets, number, None), Dataset()) if number > 0 else Dataset()
