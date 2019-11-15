@@ -5,6 +5,7 @@ Grid {
     columns: 2
 
     Segment {
+        segmentId: "1"
         width: parent.width / 2
         height: parent.height / 2
 
@@ -13,6 +14,7 @@ Grid {
     }
 
     Segment {
+        segmentId: "2"
         width: parent.width / 2
         height: parent.height / 2
 
@@ -20,6 +22,7 @@ Grid {
     }
 
     Segment {
+        segmentId: "3"
         width: parent.width / 2
         height: parent.height / 2
 
@@ -27,6 +30,7 @@ Grid {
     }
 
     Segment {
+        segmentId: "4"
         width: parent.width / 2
         height: parent.height / 2
 
